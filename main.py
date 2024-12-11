@@ -1,4 +1,5 @@
 import re
+import requests
 
 
 class MainProgramm:
@@ -31,3 +32,12 @@ class MainProgramm:
         except Exception as error_msg:
             print(f"Ошибка открытия файла: {error_msg}")
             return list()
+
+    def search_in_url(self, url):
+        """Функция проверки сайта"""
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            return self.search_in_string(response.text)
+        except Exception as error_msg:
+            return f"Ошибка чтения страницы: {error_msg}"
