@@ -33,11 +33,28 @@ class MainProgramm:
             print(f"Ошибка открытия файла: {error_msg}")
             return list()
 
-    def search_in_url(self, url):
+    def search_in_url(self, url: str) -> list:
         """Функция проверки сайта"""
         try:
             response = requests.get(url)
             response.raise_for_status()
             return self.search_in_string(response.text)
         except Exception as error_msg:
-            return f"Ошибка чтения страницы: {error_msg}"
+            print(f"Ошибка чтения страницы: {error_msg}")
+            return list()
+
+    def main_console(self) -> None:
+        """Запуск программы"""
+        t = 1
+        while t:
+            try:
+                t = int(input("Что вы хотите проверить?\n1 - строку\n2 - файл\n3 - url\n0 - Выход\n"))
+                if t == 1:
+                    print(self.search_in_string(str(input("Введите строку: "))))
+                elif t == 2:
+                    print(self.search_in_file(str(input("Введите путь к файлу"))))
+                elif t == 3:
+                    print(self.search_in_url(str(input("Введите url: "))))
+            except Exception as error_msg:
+                print(error_msg)
+                return
