@@ -58,3 +58,8 @@ class MainProgramm:
             except Exception as error_msg:
                 print(error_msg)
                 return
+
+
+if __name__ == "__main__":
+    solution = MainProgramm()
+    solution.main_console()
